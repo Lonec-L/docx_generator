@@ -58,4 +58,10 @@ ${amount} -> 2
 
 ## Output
 
-Output files will be stored in folder `./output`. They are named with row number `[0-N]`, or name provided in csv file, column `output_file`.
+Output files will be stored in folder `./output` (folder will be created if it doesnt exist). They are named with row number `[0-N]`, or name provided in csv file, column `output_file`.
+
+## convert.py
+
+convert.py is a complementary utility script, that simply takes all docx files in output folder and converts them to pdf (they are stored in `./pdf` folder). Optionally, it can also combine them into a single pdf (stored as `merged-pdf.pdf` in root folder) and clean-up after itself. *It requires Microsoft Word to be installed on the machine to work*. **Works only on WINDOWS**.
+
+Run `python convert.py -h` for help message.
