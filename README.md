@@ -1,6 +1,6 @@
 # docx_generator
 
-A simple python script that allows batch generating docx files from template and keys and values stored in csv file.
+A simple python script that allows batch generating docx files from template and csv file with keys & values.
 
 ## Installing and usage
 
