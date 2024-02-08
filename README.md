@@ -17,6 +17,7 @@ python -m venv ./env
 Activate the environment:
 Windows: `.\env\Scripts\activate`
 Linux: `./env/bin/activate`
+
 <sub><sup>If above doesnt work for you try searching for alternative for your system.</sup></sub>
 
 Install dependencies:
