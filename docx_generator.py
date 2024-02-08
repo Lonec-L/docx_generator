@@ -5,6 +5,8 @@ from python_docx_replace import docx_replace
 import argparse
 import pathlib
 
+from tqdm import tqdm
+
 parser = argparse.ArgumentParser(
     prog="docx_generator",
     description="A simple python script that allows batch generating docx files from template and keys and values stored in csv file.",
@@ -48,6 +50,8 @@ for i in range(len(keys)):
 dict_array = []
 file_names = []
 
+print("Parsing " + args.csv)
+
 for line in file:
     d = {}
     tokens = line.split(";")
@@ -63,10 +67,13 @@ template = Document(args.template)
 path =  pathlib.Path("./output")
 path.mkdir(exist_ok=True)
 
-for i in range(len(dict_array)):
+print("Generating output")
+for i in tqdm(range(len(dict_array))):
     doc = copy.deepcopy(template)
     docx_replace(doc, **dict_array[i])
     if(file_names[i] != ''):
         doc.save("./output/"+file_names[i]+".docx")
         continue
     doc.save("./output/"+str(i)+".docx")
+
+print("Done!")

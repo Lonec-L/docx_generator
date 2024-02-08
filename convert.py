@@ -3,6 +3,7 @@ import pathlib
 import sys
 import os
 import comtypes.client
+from tqdm import tqdm
 
 wdFormatPDF = 17
 
@@ -19,7 +20,6 @@ parser.add_argument("-d", "--delete", help="Deletes genereated pdf files after c
 args = parser.parse_args()
 
 
-word = comtypes.client.CreateObject('Word.Application')
 
 path =  pathlib.Path("./pdf")
 path.mkdir(exist_ok=True)
@@ -29,15 +29,19 @@ directory_path = os.path.join(script_dir, directory)
 
 pdf_path = os.path.join(script_dir, "pdf")
 
-for filename in os.listdir(directory):
+print("Opening Word client...")
+word = comtypes.client.CreateObject('Word.Application')
+
+print("Converting docx to pdf:")
+for filename in tqdm(os.listdir(directory)):
     f = os.path.join(directory_path, filename)
     # checking if it is a file
     if os.path.isfile(f):
         doc = word.Documents.Open(f)
         doc.SaveAs(pdf_path+"/"+filename+".pdf", FileFormat=wdFormatPDF)
         doc.Close()
-
 word.Quit()
+
 if(args.combine):
     print("Combining pdf files into one...")
     if(args.delete):
@@ -46,7 +50,7 @@ if(args.combine):
 
     merger = PdfWriter()
 
-    for filename in os.listdir("pdf"):
+    for filename in tqdm(os.listdir("pdf")):
         f = os.path.join("pdf", filename)
         if(os.path.isfile(f)):
             merger.append(f)
@@ -58,3 +62,4 @@ if(args.combine):
 
     merger.write("merged-pdf.pdf")
     merger.close()
+print("Done!")
