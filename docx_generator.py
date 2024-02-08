@@ -3,6 +3,7 @@ from docx import Document
 from python_docx_replace import docx_replace
 
 import argparse
+import pathlib
 
 parser = argparse.ArgumentParser(
     prog="docx_generator",
@@ -35,30 +36,37 @@ parser.add_argument(
 )
 
 args = parser.parse_args()
-print(args)
-exit()
 
-file = open(CSV_FILE_NAME, "r", encoding="utf-8-sig")
+file = open(args.csv, "r", encoding="utf-8-sig")
 
 line = file.readline()
 
-keys = line.split(sep=SEP)
+keys = line.split(sep=args.sep)
 for i in range(len(keys)):
     keys[i] = keys[i].strip()
 
 dict_array = []
-
+file_names = []
 
 for line in file:
     d = {}
     tokens = line.split(";")
     for i in range(len(keys)):
+        if(keys[i] == "output_file"):
+            file_names.append(tokens[i])
+            continue
         d[keys[i]] = tokens[i].strip().replace("{nl}", "\n")
     dict_array.append(d)
 
-template = Document(TEMPLATE_NAME)
+template = Document(args.template)
+
+path =  pathlib.Path("./output")
+path.mkdir(exist_ok=True)
 
 for i in range(len(dict_array)):
     doc = copy.deepcopy(template)
     docx_replace(doc, **dict_array[i])
-    doc.save(str(i)+".docx")
+    if(file_names[i] != ''):
+        doc.save("./output/"+file_names[i]+".docx")
+        continue
+    doc.save("./output/"+str(i)+".docx")
