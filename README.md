@@ -1,12 +1,12 @@
 # docx_generator
 
-A simple python script that allows batch generating docx files from template and keys and values stored in csv file.
+A simple python script that allows batch generating docx files from template and csv file with keys & values.
 
 ## Installing and usage
 
 First clone the repository in your desired location:
 ```
-git clone ...
+git clone https://github.com/Lonec-L/docx_generator.git
 cd docx_generator
 ```
 
@@ -19,7 +19,8 @@ Activate the environment:
 Windows: `.\env\Scripts\activate`
 
 Linux: `./env/bin/activate`
-<sub>If above doesnt work for you try searching for alternative for your system.</sub>
+
+<sup>If above doesnt work for you try searching for alternative for your system.</sup>
 
 Install dependencies:
 `pip install -r requirements.txt`
