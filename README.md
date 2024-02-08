@@ -6,7 +6,7 @@ A simple python script that allows batch generating docx files from template and
 
 First clone the repository in your desired location:
 ```
-git clone ...
+git clone [...](https://github.com/Lonec-L/docx_generator.git)
 cd docx_generator
 ```
 
