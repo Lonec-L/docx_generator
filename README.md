@@ -28,8 +28,8 @@ Install dependencies:
 Run to display help:
 `python docx_generator.py --help`
 
-Use example:
-`python docx_generator.py -t test_template.docx -c test_keys.csv -s ","`
+Running the example:
+`python docx_generator.py -t "examples\lan_party.docx" -c "examples\text.csv"`
 
 ## CSV specification
 
